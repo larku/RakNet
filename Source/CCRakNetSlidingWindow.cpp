@@ -198,11 +198,11 @@ void CCRakNetSlidingWindow::OnNAK(CCTimeType curTime, DatagramSequenceNumberType
 	}
 }
 // ----------------------------------------------------------------------------------------------------------------------------
-void CCRakNetSlidingWindow::OnAck(CCTimeType curTime, CCTimeType rtt, bool hasBAndAS, BytesPerMicrosecond _BB, BytesPerMicrosecond _AS, double totalUserDataBytesAcked, bool isContinuousSend, DatagramSequenceNumberType sequenceNumber )
+void CCRakNetSlidingWindow::OnAck(CCTimeType curTime, CCTimeType rtt, bool hasBAndAS, BytesPerMicrosecond b, BytesPerMicrosecond as, double totalUserDataBytesAcked, bool isContinuousSend, DatagramSequenceNumberType sequenceNumber )
 {
-	(void) _BB;
+	(void) b;
 	(void) totalUserDataBytesAcked;
-	(void) _AS;
+	(void) as;
 	(void) hasBAndAS;
 	(void) curTime;
 	(void) rtt;
