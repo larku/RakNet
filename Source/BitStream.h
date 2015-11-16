@@ -1284,25 +1284,8 @@ namespace RakNet
 #ifdef _MSC_VER
 #pragma warning(disable:4127)   // conditional expression is constant
 #endif
-		if (sizeof(inTemplateVar)==1)
 			WriteCompressed( ( unsigned char* ) & inTemplateVar, sizeof( templateType ) * 8, true );
-		else
-		{
-#ifndef __BITSTREAM_NATIVE_END
-#ifdef _MSC_VER
-#pragma warning(disable:4244)   // '=' : conversion from 'unsigned long' to 'unsigned short', possible loss of data
-#endif
 
-			if (DoEndianSwap())
-			{
-				unsigned char output[sizeof(templateType)];
-				ReverseBytes((unsigned char*)&inTemplateVar, output, sizeof(templateType));
-				WriteCompressed( ( unsigned char* ) output, sizeof(templateType) * 8, true );
-			}
-			else
-#endif
-				WriteCompressed( ( unsigned char* ) & inTemplateVar, sizeof(templateType) * 8, true );
-		}
 	}
 
 	template <>
@@ -1320,7 +1303,7 @@ namespace RakNet
 	template <>
 	inline void BitStream::WriteCompressed(const uint24_t &var)
 	{
-		Write(var);
+		WriteCompressed(var.val);
 	}
 
 	template <>
@@ -1622,25 +1605,7 @@ namespace RakNet
 #ifdef _MSC_VER
 #pragma warning(disable:4127)   // conditional expression is constant
 #endif
-		if (sizeof(outTemplateVar)==1)
-			return ReadCompressed( ( unsigned char* ) &outTemplateVar, sizeof(templateType) * 8, true );
-		else
-		{
-#ifndef __BITSTREAM_NATIVE_END
-			if (DoEndianSwap())
-			{
-				unsigned char output[sizeof(templateType)];
-				if (ReadCompressed( ( unsigned char* ) output, sizeof(templateType) * 8, true ))
-				{
-					ReverseBytes(output, (unsigned char*)&outTemplateVar, sizeof(templateType));
-					return true;
-				}
-				return false;
-			}
-			else
-#endif
-				return ReadCompressed( ( unsigned char* ) & outTemplateVar, sizeof(templateType) * 8, true );
-		}
+			return ReadCompressed((unsigned char*)&outTemplateVar, sizeof(templateType) * 8, true);
 	}
 
 	template <>
@@ -1652,7 +1617,7 @@ namespace RakNet
 	template <>
 	inline bool BitStream::ReadCompressed(uint24_t &outTemplateVar)
 	{
-		return Read(outTemplateVar);
+		return ReadCompressed(outTemplateVar.val);
 	}
 
 	template <>
