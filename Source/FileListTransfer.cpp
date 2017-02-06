@@ -63,7 +63,23 @@ struct FileListReceiver
 
 using namespace RakNet;
 
-FileListReceiver::FileListReceiver() {filesReceived=0; setTotalDownloadedLength=0; partLength=1; DataStructures::Map<unsigned int, FLR_MemoryBlock>::IMPLEMENT_DEFAULT_COMPARISON();}
+FileListReceiver::FileListReceiver()
+	: downloadHandler(nullptr)
+	, allowedSender(UNASSIGNED_SYSTEM_ADDRESS)
+	, setID(0)
+	, setCount(0)
+	, setTotalCompressedTransmissionLength(0)
+	, setTotalFinalLength(0)
+	, setTotalDownloadedLength(0)
+	, gotSetHeader(false)
+	, deleteDownloadHandler(false)
+	, isCompressed(false)
+	, filesReceived(0)
+	, partLength(0)
+
+{
+	DataStructures::Map<unsigned int, FLR_MemoryBlock>::IMPLEMENT_DEFAULT_COMPARISON();
+}
 FileListReceiver::~FileListReceiver() {
 	unsigned int i=0;
 	for (i=0; i < pushedFiles.Size(); i++)

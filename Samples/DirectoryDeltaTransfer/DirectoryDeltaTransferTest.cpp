@@ -36,8 +36,7 @@
 class TestCB : public RakNet::FileListTransferCBInterface
 {
 public:
-	bool OnFile(
-		OnFileStruct *onFileStruct)
+	bool OnFile(OnFileStruct *onFileStruct)
 	{
 		assert(onFileStruct->byteLengthOfThisFile >= onFileStruct->bytesDownloadedForThisFile);
         printf("%i. (100%%) %i/%i %s %ib / %ib\n", onFileStruct->setID, onFileStruct->fileIndex+1, onFileStruct->numberOfFilesInThisSet, onFileStruct->fileName, onFileStruct->byteLengthOfThisFile, onFileStruct->byteLengthOfThisSet);
@@ -62,6 +61,8 @@ public:
 	virtual bool OnDownloadComplete(DownloadCompleteStruct *dcs)
 	{
 		printf("Download complete.\n");
+		if (dcs->byteLengthOfThisSet == 0 && dcs->numberOfFilesInThisSet == 0)
+			printf("File already exists.\n");
 
 		// Returning false automatically deallocates the automatically allocated handler that was created by DirectoryDeltaTransfer
 		return false;
