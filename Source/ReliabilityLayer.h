@@ -92,7 +92,7 @@ public:
 		data = RakNet::OP_NEW_ARRAY<InternalPacket*>(allocation_size, file, line);
 		packetId = internalPacket->splitPacketId;
 
-		for (int i = 0; i < allocation_size; ++i)
+		for (unsigned i = 0; i < allocation_size; ++i)
 		{
 			data[i] = NULL;
 		}
