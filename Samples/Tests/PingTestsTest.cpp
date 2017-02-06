@@ -56,8 +56,7 @@ int PingTestsTest::RunTest(DataStructures::List<RakString> params,bool isVerbose
 
 	SystemAddress currentSystem;
 
-	currentSystem.SetBinaryAddress("127.0.0.1");
-	currentSystem.port=60000;
+	currentSystem.SetBinaryAddress("127.0.0.1:60000");
 
 	printf("Connecting sender2\n");
 	if (!TestHelpers::WaitAndConnectTwoPeersLocally(sender2,receiver,5000))

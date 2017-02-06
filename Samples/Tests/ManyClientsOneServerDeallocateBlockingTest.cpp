@@ -18,8 +18,7 @@ void ManyClientsOneServerDeallocateBlockingTest::WaitForConnectionRequestsToComp
 	for (int i=0;i<clientNum;i++)
 	{
 
-		currentSystem.SetBinaryAddress("127.0.0.1");
-		currentSystem.port=60000;
+		currentSystem.SetBinaryAddress("127.0.0.1:60000");
 
 		while (CommonFunctions::ConnectionStateMatchesOptions (clientList[i],currentSystem,false,true,true) )
 		{
@@ -319,8 +318,7 @@ int ManyClientsOneServerDeallocateBlockingTest::RunTest(DataStructures::List<Rak
 		for (int i=0;i<clientNum;i++)
 		{
 
-			currentSystem.SetBinaryAddress("127.0.0.1");
-			currentSystem.port=60000;
+			currentSystem.SetBinaryAddress("127.0.0.1:60000");
 			if(!CommonFunctions::ConnectionStateMatchesOptions (clientList[i],currentSystem,true,true,true,true) )//Are we connected or is there a pending operation ?
 			{
 
@@ -352,8 +350,7 @@ int ManyClientsOneServerDeallocateBlockingTest::RunTest(DataStructures::List<Rak
 	for (int i=0;i<clientNum;i++)
 	{
 
-		currentSystem.SetBinaryAddress("127.0.0.1");
-		currentSystem.port=60000;
+		currentSystem.SetBinaryAddress("127.0.0.1:60000");
 
 		if(!CommonFunctions::ConnectionStateMatchesOptions (clientList[i],currentSystem,true,true,true,true) )//Are we connected or is there a pending operation ?
 		{

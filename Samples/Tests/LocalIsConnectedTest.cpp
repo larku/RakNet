@@ -57,8 +57,7 @@ int LocalIsConnectedTest::RunTest(DataStructures::List<RakString> params,bool is
 
 	SystemAddress serverAddress;
 
-	serverAddress.SetBinaryAddress("127.0.0.1");
-	serverAddress.port=60000;
+	serverAddress.SetBinaryAddress("127.0.0.1:60000");
 	TimeMS entryTime=GetTimeMS();
 	bool lastConnect=false;
 	if (isVerbose)
@@ -69,7 +68,7 @@ int LocalIsConnectedTest::RunTest(DataStructures::List<RakString> params,bool is
 
 		if(!CommonFunctions::ConnectionStateMatchesOptions (client,serverAddress,true,true,true,true))
 		{
-			lastConnect=client->Connect("127.0.0.1",serverAddress.port,0,0)==CONNECTION_ATTEMPT_STARTED;
+			lastConnect=client->Connect("127.0.0.1",serverAddress.GetPort(),0,0)==CONNECTION_ATTEMPT_STARTED;
 		}
 
 		RakSleep(100);
@@ -98,7 +97,7 @@ int LocalIsConnectedTest::RunTest(DataStructures::List<RakString> params,bool is
 	}
 
 	RakSleep(1000);
-	client->Connect("127.0.0.1",serverAddress.port,0,0);
+	client->Connect("127.0.0.1",serverAddress.GetPort(),0,0);
 
 	if(!CommonFunctions::ConnectionStateMatchesOptions (client,serverAddress,true,true,true))
 	{
@@ -115,7 +114,7 @@ int LocalIsConnectedTest::RunTest(DataStructures::List<RakString> params,bool is
 
 		if(!CommonFunctions::ConnectionStateMatchesOptions (client,serverAddress,true,true,true,true))
 		{
-			client->Connect("127.0.0.1",serverAddress.port,0,0);
+			client->Connect("127.0.0.1",serverAddress.GetPort(),0,0);
 		}
 
 		RakSleep(100);

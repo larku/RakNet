@@ -8,6 +8,7 @@
  *
  */
 
+#define NOMINMAX
 #include <iostream>
 #include <limits>
 
