@@ -3,7 +3,7 @@ Aragonsr's fork of Larku's Fork of RakNet 4.081
 
 Copyright (c) 2014, Oculus VR, Inc.
 
-Fork notes [updated 02-06-2017]
+Fork notes [updated 06-January-2017]
 ------------------------------------------
 
 This fork contains quite a lot of compile error fixes for Visual Studio 2015.
