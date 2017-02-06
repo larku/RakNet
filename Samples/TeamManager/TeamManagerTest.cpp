@@ -24,6 +24,7 @@
 #include "SocketLayer.h"
 #include "ReplicaManager3.h"
 #include "NetworkIDManager.h"
+#include "Gets.h"
 
 using namespace RakNet;
 
@@ -398,7 +399,7 @@ int main(void)
 				printf("Request specific team\n");
 				char buff1[256];
 				printf("Enter team index (0-2): ");
-				gets(buff1);
+				Gets(buff1, sizeof(buff1));
 				if (buff1[0]!=0 && buff1[0]>='0' && buff1[0]<='2')
 				{
 					success = user->tmTeamMember.RequestTeam(TeamSelection::SpecificTeam(&(teams[buff1[0]-'0'].tmTeam)));
@@ -414,10 +415,10 @@ int main(void)
 				printf("Request team switch\n");
 				char buff1[256];
 				printf("Enter team index to join (0-2): ");
-				gets(buff1);
+				Gets(buff1, sizeof(buff1));
 				char buff2[256];
 				printf("Enter team index to leave (0-2) or leave empty for all: ");
-				gets(buff2);
+				Gets(buff1, sizeof(buff2));
 				if (buff1[0]!=0 && buff1[0]>='0' && buff1[0]<='2' &&
 					(buff2[0]==0 || (buff2[0]>='0' && buff2[0]<='2')))
 				{
@@ -437,7 +438,7 @@ int main(void)
 				printf("Cancel request team\n");
 				char buff1[256];
 				printf("Enter team index to cancel (0-2) or leave empty for all: ");
-				gets(buff1);
+				Gets(buff1, sizeof(buff1));
 				if ((buff1[0]!=0 && buff1[0]>='0' && buff1[0]<='2') || buff1[0]==0)
 				{
 					if (buff1[0])
@@ -456,7 +457,7 @@ int main(void)
 				printf("Leave specific team\n");
 				char buff1[256];
 				printf("Enter team index to leave (0-2): ");
-				gets(buff1);
+				Gets(buff1, sizeof(buff1));
 				if (buff1[0]!=0 && buff1[0]>='0' && buff1[0]<='2')
 				{
 					success = user->tmTeamMember.LeaveTeam(&(teams[buff1[0]-'0'].tmTeam),0);
@@ -480,10 +481,10 @@ int main(void)
 				printf("Set team member limit\n");
 				char buff1[256];
 				printf("Enter team index to operate on (0-2): ");
-				gets(buff1);
+				Gets(buff1, sizeof(buff1));
 				char buff2[256];
 				printf("Enter limit (0-9): ");
-				gets(buff2);
+				Gets(buff1, sizeof(buff2));
 				if (buff1[0]!=0 && buff1[0]>='0' && buff1[0]<='2' &&
 					buff2[0]!=0 && buff2[0]>='0' && buff2[0]<='9')
 				{
