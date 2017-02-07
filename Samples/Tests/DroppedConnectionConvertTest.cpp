@@ -48,8 +48,7 @@ int DroppedConnectionConvertTest::RunTest(DataStructures::List<RakString> params
 
 	// Used to refer to systems.  We already know the IP
 	unsigned short serverPort = 20000;
-	serverID.binaryAddress=inet_addr("127.0.0.1");
-	serverID.port=serverPort;
+	serverID.SetBinaryAddress("127.0.0.1:20000");
 
 	server=RakPeerInterface::GetInstance();
 	destroyList.Clear(false,_FILE_AND_LINE_);
@@ -296,18 +295,18 @@ int DroppedConnectionConvertTest::RunTest(DataStructures::List<RakString> params
 				{
 				case ID_CONNECTION_REQUEST_ACCEPTED:
 					if (isVerbose)
-						printf("%i: %ID_CONNECTION_REQUEST_ACCEPTED from %i.\n",sender, p->systemAddress.port);
+						printf("%i: %ID_CONNECTION_REQUEST_ACCEPTED from %i.\n",sender, p->systemAddress.GetPort());
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					// Connection lost normally
 					if (isVerbose)
-						printf("%i: ID_DISCONNECTION_NOTIFICATION from %i.\n",sender, p->systemAddress.port);
+						printf("%i: ID_DISCONNECTION_NOTIFICATION from %i.\n",sender, p->systemAddress.GetPort());
 					break;
 
 				case ID_NEW_INCOMING_CONNECTION:
 					// Somebody connected.  We have their IP now
 					if (isVerbose)
-						printf("%i: ID_NEW_INCOMING_CONNECTION from %i.\n",sender, p->systemAddress.port);
+						printf("%i: ID_NEW_INCOMING_CONNECTION from %i.\n",sender, p->systemAddress.GetPort());
 					break;
 
 
@@ -315,12 +314,12 @@ int DroppedConnectionConvertTest::RunTest(DataStructures::List<RakString> params
 					// Couldn't deliver a reliable packet - i.e. the other system was abnormally
 					// terminated
 					if (isVerbose)
-						printf("%i: ID_CONNECTION_LOST from %i.\n",sender, p->systemAddress.port);
+						printf("%i: ID_CONNECTION_LOST from %i.\n",sender, p->systemAddress.GetPort());
 					break;
 
 				case ID_NO_FREE_INCOMING_CONNECTIONS:
 					if (isVerbose)
-						printf("%i: ID_NO_FREE_INCOMING_CONNECTIONS from %i.\n",sender, p->systemAddress.port);
+						printf("%i: ID_NO_FREE_INCOMING_CONNECTIONS from %i.\n",sender, p->systemAddress.GetPort());
 					break;
 
 				default:

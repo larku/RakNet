@@ -270,7 +270,7 @@ void FileList::AddFilesFromDirectory(const char *applicationDirectory, const cha
 		strcat(fullPath, "*");
 
 
-                dir=_findfirst(fullPath, &fileInfo );
+		dir=_findfirst(fullPath, &fileInfo );
 		if (dir==-1)
 		{
 			_findclose(dir);
@@ -281,7 +281,7 @@ void FileList::AddFilesFromDirectory(const char *applicationDirectory, const cha
 			return;
 		}
 
-//		RAKNET_DEBUG_PRINTF("Adding %s. %i remaining.\n", fullPath, dirList.Size());
+		// RAKNET_DEBUG_PRINTF("Adding %s. %i remaining.\n", fullPath, dirList.Size());
 		for (unsigned int flpcIndex=0; flpcIndex < fileListProgressCallbacks.Size(); flpcIndex++)
 			fileListProgressCallbacks[flpcIndex]->OnDirectory(this, fullPath, dirList.Size());
 
@@ -792,23 +792,13 @@ void FileList::GetCallbacks(DataStructures::List<FileListProgress*> &callbacks)
 	callbacks = fileListProgressCallbacks;
 }
 
-
 bool FileList::FixEndingSlash(char *str)
 {
-#ifdef _WIN32
-	if (str[strlen(str)-1]!='/' && str[strlen(str)-1]!='\\')
-	{
-		strcat(str, "\\"); // Only \ works with system commands, used by AutopatcherClient
-		return true;
-	}
-#else
 	if (str[strlen(str)-1]!='\\' && str[strlen(str)-1]!='/')
 	{
 		strcat(str, "/"); // Only / works with Linux
 		return true;
 	}
-#endif
-
 	return false;
 }
 
